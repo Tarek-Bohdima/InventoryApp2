@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">InventoryApp2</string>
+    <string name="editor_activity_label">Add Product</string>
+    <string name="action_insert_dummy_data">Insert Dummy Data</string>
+    <string name="action_delete_all_entries">Delete All Entries</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+    <string name="category_overview">Overview</string>
+    <string name="hint_product_name">Name</string>
+    <string name="edit_product_price">Price</string>
 </resources>

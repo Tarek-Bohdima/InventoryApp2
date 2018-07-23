@@ -38,6 +38,7 @@
 
 package com.example.android.inventoryapp2.data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -54,11 +55,22 @@ public class ProductContract {
     private ProductContract() {
     }
 
+    public static final String CONTENT_AUTHORITY = "com.example.android.inventoryapp2";
+
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+
+    public static final String PATH_PRODUCTS = "products";
+
     /**
      * Inner class that defines constant values for the products database table.
      * Each entry in the table represents a single product.
      */
     public static final class ProductEntry implements BaseColumns {
+
+        /**
+         * The content URI to access the products data in the provider
+         */
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_PRODUCTS);
 
         public static final String TABLE_NAME = "products";
 
