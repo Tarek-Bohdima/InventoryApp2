@@ -12,4 +12,9 @@
     <string name="edit_product_price">Price</string>
     <string name="edit_supplier_phone">Supplier Phone</string>
     <string name="quantity_in_stock">10</string>
+    <string name="product_name">Name</string>
+    <string name="product_price_text">Price</string>
+    <string name="product_quantity_text">Quantity</string>
+    <string name="supplier_name">Supplier Name</string>
+    <string name="supplier_phone">Supplier Phone</string>
 </resources>
