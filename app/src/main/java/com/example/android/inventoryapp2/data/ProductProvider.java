@@ -34,6 +34,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.android.inventoryapp2.data.ProductContract.ProductEntry;
@@ -162,12 +163,31 @@ public class ProductProvider extends ContentProvider {
      * Insert a product into the database with the given content values. Return the new content URI
      * for that specific row in the database.
      */
-    private Uri insertProduct(Uri uri, ContentValues contentValues) {
+    private Uri insertProduct(Uri uri, ContentValues values) {
+        // Check that the name is not null
+        String name = values.getAsString(ProductEntry.COLUMN_PRODUCT_NAME);
+        if (TextUtils.isEmpty(name)) {
+            throw new IllegalArgumentException("Product requires a name");
+        }
+
+        // check that the price is not null or less than 0
+        Double price = values.getAsDouble(ProductEntry.COLUMN_PRODUCT_PRICE);
+        if (price != null && price < 0) {
+            throw new IllegalArgumentException("Product requires valid price");
+        }
+
+        // check that the quantity is not null or less than 0
+        Integer quantity = values.getAsInteger(ProductEntry.COLUMN_PRODUCT_QUANTITY);
+        if (quantity != null && quantity < 0) {
+            throw new IllegalArgumentException("Product require valid quantity");
+        }
+
+
         // Get writable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         // Insert the new pet with the given values
-        long id = database.insert(ProductEntry.TABLE_NAME, null, contentValues);
+        long id = database.insert(ProductEntry.TABLE_NAME, null, values);
 
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {

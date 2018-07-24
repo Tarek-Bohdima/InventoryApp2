@@ -2,19 +2,16 @@ package com.example.android.inventoryapp2;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.android.inventoryapp2.data.ProductContract.ProductEntry;
-
-import java.util.List;
 
 public class CatalogActivity extends AppCompatActivity {
 
@@ -41,9 +38,12 @@ public class CatalogActivity extends AppCompatActivity {
         View emptyView = findViewById(R.id.empty_view);
         productListView.setEmptyView(emptyView);
 
-        insertProduct();
-//        displayDatabaseInfo();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        insertProduct();
     }
 
     /**
@@ -147,5 +147,21 @@ public class CatalogActivity extends AppCompatActivity {
         // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.menu_catalog, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar overflow menu
+        switch (item.getItemId()) {
+            // Respond to a click on the "Insert dummy data" menu option
+            case R.id.action_insert_dummy_data:
+                insertProduct();
+                return true;
+            // Respond to a click on the "Delete all entries" menu option
+            case R.id.action_delete_all_entries:
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
