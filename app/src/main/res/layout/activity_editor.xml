@@ -38,18 +38,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <TextView
-            android:text="@string/category_overview"
-            style="@style/CategoryStyle"/>
+            style="@style/CategoryStyle"
+            android:text="@string/products_overview"/>
 
-        <!-- Input fields -->
+
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:paddingLeft="4dp"
-            android:orientation="vertical">
+            style="@style/linearLayoutStyle">
+
+            <TextView
+                style="@style/TextView_editor"
+                android:text="Name"/>
 
             <!-- Name field -->
             <EditText
@@ -59,19 +60,111 @@
                 style="@style/EditorFieldStyle"
                 tools:text="Product Name"/>
 
-            <EditText
-                android:id="@+id/edit_product_price"
-                android:hint="@string/edit_product_price"
-                style="@style/EditorFieldStyle"
-                tools:text="Price"/>
+        </LinearLayout>
+
+        <LinearLayout
+           style="@style/linearLayoutStyle">
+
+            <TextView
+                style="@style/TextView_editor"
+                android:text="Price"/>
 
             <!-- Price field -->
             <EditText
+                android:id="@+id/edit_product_price"
+                android:hint="@string/edit_product_price"
+                android:inputType="numberDecimal"
+                style="@style/EditorFieldStyle"
+                tools:text="Price"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearLayoutStyle">
+
+            <TextView
+                style="@style/TextView_editor"
+                android:text="Quantity"/>
+
+            <ImageView
+                android:id="@+id/decrement_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_remove_circle_blue_700_24dp"/>
+
+            <!-- Quantity field-->
+            <TextView
+                android:id="@+id/product_stock"
+                style="@style/TextView_editor"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:gravity="center_horizontal"
+                android:hint="@string/quantity_in_stock"
+                tools:text="10"/>
+
+            <ImageView
+                android:id="@+id/increment_quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_circle_blue_700_24dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <!-- Divider -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:background="@android:color/holo_blue_dark">
+    </LinearLayout>
+
+
+    <!-- Supplier category -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/CategoryStyle"
+            android:text="@string/supplier_overview"/>
+
+        <LinearLayout
+         style="@style/linearLayoutStyle">
+
+            <TextView
+                style="@style/TextView_editor"
+                android:text="Supplier Name"/>
+            <!-- Name field -->
+            <EditText
                 android:id="@+id/edit_supplier_name"
-                android:hint="Supplier Name"
+                android:hint="@string/hint_supplier_name"
+                android:inputType="textCapWords"
                 style="@style/EditorFieldStyle"
                 tools:text="Supplier Name"/>
 
         </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearLayoutStyle">
+
+            <TextView
+                style="@style/TextView_editor"
+                android:text="Supplier Phone"/>
+
+            <!-- Price field -->
+            <EditText
+                android:id="@+id/edit_supplier_phone"
+                android:hint="@string/edit_supplier_phone"
+                android:inputType="phone"
+                style="@style/EditorFieldStyle"
+                tools:text="001-02-1234567"/>
+
+        </LinearLayout>
     </LinearLayout>
+
+
 </LinearLayout>

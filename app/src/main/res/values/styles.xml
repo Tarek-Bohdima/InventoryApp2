@@ -15,21 +15,39 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Style for linear layout in detail_layout.xml. -->
+    <style name="linearLayoutStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/linear_layout_padding</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="TextView_editor">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:fontFamily">sans_serif_light</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
     <!-- Style for a category in the editor -->
     <style name="CategoryStyle">
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
     </style>
 
     <!-- Style for an EditText field in the editor -->
     <style name="EditorFieldStyle">
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
     </style>

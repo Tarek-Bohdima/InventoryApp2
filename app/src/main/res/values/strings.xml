@@ -5,7 +5,11 @@
     <string name="action_delete_all_entries">Delete All Entries</string>
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
-    <string name="category_overview">Overview</string>
+    <string name="products_overview">Product</string>
+    <string name="supplier_overview">Supplier</string>
     <string name="hint_product_name">Name</string>
+    <string name="hint_supplier_name">Supplier name</string>
     <string name="edit_product_price">Price</string>
+    <string name="edit_supplier_phone">Supplier Phone</string>
+    <string name="quantity_in_stock">10</string>
 </resources>
