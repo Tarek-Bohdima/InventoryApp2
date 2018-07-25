@@ -240,9 +240,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             }
         });
 
-
         setupSpinner();
-
     }
 
     // credit to https://stackoverflow.com/a/15846808/8899344
@@ -310,8 +308,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String productQuantity = productQuantityText.getText().toString().trim();
         String supplierName = supplierNameEditText.getText().toString().trim();
         String supplierPhone = supplierPhoneEditText.getText().toString().trim();
-        Double price = Double.parseDouble(productPrice);
-        int quantity = Integer.parseInt(productQuantity);
+
 
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
@@ -336,7 +333,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             return;
         }
 
-        if (TextUtils.isEmpty(productQuantity)) {
+        int quantity = Integer.parseInt(productQuantity);
+        if (TextUtils.isEmpty(productQuantity) || quantity == 0) {
             productQuantityText.setError("Quantity must be more than 0");
             Toast.makeText(this, "Please choose a valid quantity", Toast.LENGTH_SHORT).show();
             return;
@@ -352,6 +350,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             Toast.makeText(this, "Please write the supplier phone number", Toast.LENGTH_SHORT).show();
             return;
         }
+
+
+        int price = Integer.parseInt(productPrice);
 
 
         // Create a ContentValues object where column names are the keys,
@@ -376,7 +377,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.edit_insert_product_sucessful), Toast.LENGTH_SHORT).show();
-            }
+            }finish();
         } else {
             // Otherwise this is an EXISTING product, so update the product with content URI: mCurrentProductUri
             // and pass in the new ContentValues. Pass in null for the selection and selection args
@@ -521,14 +522,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             // Extract out the value from the Cursor for the given column index
             String productName = cursor.getString(nameColumnIndex);
-            double productPrice = cursor.getDouble(priceColumnIndex);
+            int productPrice = cursor.getInt(priceColumnIndex);
             int productQuantity = cursor.getInt(quantityColumnIndex);
             String supplierName = cursor.getString(supplierColumnIndex);
             String supplierPhone = cursor.getString(supplierPhoneColumnIndex);
 
             // Update the views on the screen with the values from the database
             productNameEditText.setText(productName);
-            productPriceEditText.setText(Double.toString(productPrice));
+            productPriceEditText.setText(Integer.toString(productPrice));
             productQuantityText.setText(Integer.toString(productQuantity));
             supplierNameEditText.setText(supplierName);
             supplierPhoneEditText.setText(supplierPhone);
