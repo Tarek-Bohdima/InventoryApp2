@@ -44,4 +44,5 @@
     <!-- Common margin value used throughout the app -->
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="linear_layout_padding">8dp</dimen>
+    <dimen name="list_item_padding_bottom">4dp</dimen>
 </resources>

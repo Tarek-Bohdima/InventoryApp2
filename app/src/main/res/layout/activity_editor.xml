@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
 
   PROJECT LICENSE
 
@@ -25,8 +24,7 @@
   -->
 
 <!-- Layout for the editor -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -39,60 +37,57 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             style="@style/CategoryStyle"
-            android:text="@string/title_products_overview"/>
+            android:text="@string/title_products_overview" />
 
 
-
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
             <TextView
                 style="@style/TextView_editor"
-                android:text="@string/edit_product_name"/>
+                android:text="@string/edit_product_name" />
 
             <!-- Name field -->
             <EditText
                 android:id="@+id/edit_product_name"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_product_name"
                 android:inputType="textCapWords"
-                style="@style/EditorFieldStyle"
-                tools:text="Product Name"/>
+                tools:text="Product Name" />
 
         </LinearLayout>
 
-        <LinearLayout
-           style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
             <TextView
                 style="@style/TextView_editor"
-                android:text="@string/edit_product_price"/>
+                android:text="@string/edit_product_price" />
 
             <!-- Price field -->
             <EditText
                 android:id="@+id/edit_product_price"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_product_price"
                 android:inputType="numberDecimal"
-                style="@style/EditorFieldStyle"
-                tools:text="Price"/>
+                tools:text="Price" />
 
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
             <TextView
                 style="@style/TextView_editor"
                 android:layout_weight="2"
-                android:text="@string/edit_product_quantity"/>
+                android:text="@string/edit_product_quantity" />
 
             <ImageButton
                 android:id="@+id/decrement_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_remove_circle_blue_700_24dp"/>
+                android:src="@drawable/ic_remove_circle_blue_700_24dp" />
 
             <!-- Quantity field-->
             <TextView
@@ -100,31 +95,31 @@
                 style="@style/TextView_editor"
                 android:gravity="center_horizontal"
                 android:hint="@string/quantity_in_stock"
-                tools:text="10"/>
+                tools:text="10" />
 
             <ImageButton
                 android:id="@+id/increment_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_add_circle_blue_700_24dp"/>
+                android:src="@drawable/ic_add_circle_blue_700_24dp" />
 
             <LinearLayout
                 android:id="@+id/spinner"
                 android:layout_width="0dp"
-                android:layout_weight="2"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:paddingBottom="18dp"
-                android:orientation="vertical">
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:paddingBottom="18dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Increment By:"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="Increment By:"
-                    tools:text="Increment By:"/>
+                    tools:text="Increment By:" />
 
                 <Spinner
                     android:id="@+id/spinner_increments"
@@ -147,10 +142,9 @@
         android:layout_width="match_parent"
         android:layout_height="3dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/activity_margin"
         android:layout_marginBottom="@dimen/activity_margin"
-        android:background="@android:color/holo_blue_dark">
-    </LinearLayout>
+        android:layout_marginTop="@dimen/activity_margin"
+        android:background="@android:color/holo_blue_dark"></LinearLayout>
 
 
     <!-- Supplier category -->
@@ -161,38 +155,42 @@
 
         <TextView
             style="@style/CategoryStyle"
-            android:text="@string/title_supplier_overview"/>
+            android:text="@string/title_supplier_overview" />
 
-        <LinearLayout
-         style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
             <TextView
                 style="@style/TextView_editor"
-                android:text="@string/edit_supplier_name"/>
+                android:text="@string/edit_supplier_name" />
             <!-- Name field -->
             <EditText
                 android:id="@+id/edit_supplier_name"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_supplier_name"
                 android:inputType="textCapWords"
-                style="@style/EditorFieldStyle"
-                tools:text="Supplier Name"/>
+                tools:text="Supplier Name" />
 
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
             <TextView
                 style="@style/TextView_editor"
-                android:text="@string/edit_supplier_phone"/>
+                android:text="@string/edit_supplier_phone" />
 
             <!-- Price field -->
             <EditText
                 android:id="@+id/edit_supplier_phone"
+                style="@style/EditorFieldStyle"
                 android:hint="@string/hint_supplier_phone"
                 android:inputType="phone"
-                style="@style/EditorFieldStyle"
-                tools:text="001-02-1234567"/>
+                tools:text="001-02-1234567" />
+
+            <ImageButton
+                android:id="@+id/call_supplier"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_action_phone_start" />
 
         </LinearLayout>
     </LinearLayout>

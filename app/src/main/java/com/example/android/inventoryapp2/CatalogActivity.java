@@ -1,20 +1,33 @@
 package com.example.android.inventoryapp2;
 
+import android.app.AlertDialog;
+import android.app.LoaderManager;
+import android.content.ContentUris;
 import android.content.ContentValues;
+import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp2.data.ProductContract.ProductEntry;
 
-public class CatalogActivity extends AppCompatActivity {
+public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final int PRODUCT_LOADER = 0;
+
+    ProductCursorAdapter mCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,90 +51,36 @@ public class CatalogActivity extends AppCompatActivity {
         View emptyView = findViewById(R.id.empty_view);
         productListView.setEmptyView(emptyView);
 
-    }
+        // Setup an Adapter to create a list item for each row of pet data in the Cursor.
+        // There is no product data yet (until the loader finishes) so pass in null for the Cursor.
+        mCursorAdapter = new ProductCursorAdapter(this, null);
+        productListView.setAdapter(mCursorAdapter);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        insertProduct();
-    }
+        // Setup item click listener
+        productListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // Create new intent to go to {@link EditorActivity}
+                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
 
-    /**
-     * Temporary helper method to display information in the onscreen TextView about the state of
-     * the products database.
-     */
-//    private void displayDatabaseInfo() {
-//
-//        // Define a projection that specifies which columns from the database
-//        // you will actually use after this query.
-//        String[] projection = {
-//                ProductEntry._ID,
-//                ProductEntry.COLUMN_PRODUCT_NAME,
-//                ProductEntry.COLUMN_PRODUCT_PRICE,
-//                ProductEntry.COLUMN_PRODUCT_QUANTITY,
-//                ProductEntry.COLUMN_SUPPLIER_NAME,
-//                ProductEntry.COLUMN_SUPPLIER_PHONE_NUMBER};
-//
-//        // Perform a query on the provider using the ContentResolver.
-//        // Use the {@link ProductEntry#CONTENT_URI} to access the product data.
-//        Cursor cursor = getContentResolver().query(
-//                ProductEntry.CONTENT_URI,
-//                projection,
-//                null,
-//                null,
-//                null);
-//
-//        TextView displayView = (TextView) findViewById(R.id.text_view_product);
-//
-//        try {
-//            // Create a header in the Text View that looks like this:
-//            //
-//            // The products table contains <number of rows in Cursor> products.
-//            // _id - product name - price - quantity - supplier name - supplier phone number
-//            //
-//            // In the while loop below, iterate through the rows of the cursor and display
-//            // the information from each column in this order.
-//            displayView.setText("The Products tables contains " + cursor.getCount() + " products.\n\n");
-//            displayView.append(ProductEntry._ID + " - " +
-//                    ProductEntry.COLUMN_PRODUCT_NAME + " - " +
-//                    ProductEntry.COLUMN_PRODUCT_PRICE + " - " +
-//                    ProductEntry.COLUMN_PRODUCT_QUANTITY + " - " +
-//                    ProductEntry.COLUMN_SUPPLIER_NAME + " - " +
-//                    ProductEntry.COLUMN_SUPPLIER_PHONE_NUMBER + "\n");
-//
-//            // Figure out the index of each column
-//            int idColumnIndex = cursor.getColumnIndex(ProductEntry._ID);
-//            int nameColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_NAME);
-//            int priceColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_PRICE);
-//            int quantityColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_PRODUCT_QUANTITY);
-//            int supplierColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_SUPPLIER_NAME);
-//            int supplierPhoneColumnIndex = cursor.getColumnIndex(ProductEntry.COLUMN_SUPPLIER_PHONE_NUMBER);
-//
-//            // Iterate through all the returned rows in the cursor
-//            while (cursor.moveToNext()) {
-//                // Use that index to extract the String or Int value of the word
-//                // at the current row the cursor is on.
-//                int currentID = cursor.getInt(idColumnIndex);
-//                String currentName = cursor.getString(nameColumnIndex);
-//                int currentPrice = cursor.getInt(priceColumnIndex);
-//                int currentQuantity = cursor.getInt(quantityColumnIndex);
-//                String currentSupplier = cursor.getString(supplierColumnIndex);
-//                String currentSupplierPhone = cursor.getString(supplierPhoneColumnIndex);
-//
-//                // Display the values from each column of the current row in the cursor in the TextView
-//                displayView.append(("\n" + currentID + " - " +
-//                        currentName + " - " +
-//                        currentPrice + " - " +
-//                        currentQuantity + " - " +
-//                        currentSupplier + " - " +
-//                        currentSupplierPhone));
-//            }
-//        } finally {
-//            // Always close the cursor when you're done reading from it. This releases all its
-//            // resources and makes it invalid.
-//            cursor.close();
-//        }
-//    }
+                // Form the content URI that represents the specific product that was clicked on,
+                // by appending the "id" (passed as input to this method) onto the
+                // {@link ProductEntry#CONTENT_URI}.
+                // For example, the URI would be "content://com.example.android.inventoryapp2/products/2"
+                // if the pet with ID 2 was clicked on.
+                Uri currentUri = ContentUris.withAppendedId(ProductEntry.CONTENT_URI, id);
+
+                // Set the URI on the data field of the intent
+                intent.setData(currentUri);
+
+                // Launch the {@link EditorActivity} to display the data for the current product.
+                startActivity(intent);
+            }
+        });
+
+        // Kick off the loader
+        getLoaderManager().initLoader(PRODUCT_LOADER, null, this);
+    }
 
     /**
      * Helper method to insert hardcoded pet data into the database. For debugging purposes only.
@@ -138,6 +97,10 @@ public class CatalogActivity extends AppCompatActivity {
         values.put(ProductEntry.COLUMN_SUPPLIER_NAME, "Amazon.com");
         values.put(ProductEntry.COLUMN_SUPPLIER_PHONE_NUMBER, "001-01-00000001");
 
+        // Insert a new row for Product into the provider using the ContentResolver.
+        // Use the {@link ProductEntry#CONTENT_URI} to indicate that we want to insert
+        // into the products database table.
+        // Receive the new content URI that will allow us to access Product's data in the future.
         Uri newUri = getContentResolver().insert(ProductEntry.CONTENT_URI, values);
     }
 
@@ -159,9 +122,81 @@ public class CatalogActivity extends AppCompatActivity {
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
+                showDeletConfirmationDialog();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        // Define a projection that specifies the columns from the table we care about.
+        String[] projection = {
+                ProductEntry._ID,
+                ProductEntry.COLUMN_PRODUCT_NAME,
+                ProductEntry.COLUMN_PRODUCT_PRICE,
+                ProductEntry.COLUMN_PRODUCT_QUANTITY
+        };
+
+        // This loader will execute the ContentProvider's query method on a background thread
+        return new CursorLoader(this,       // Parent activity context
+                ProductEntry.CONTENT_URI,           // Provider content URI to query
+                projection,                         // Columns to include in the resulting Cursor
+                null,
+                null,
+                null);
+
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Update {@link ProductCursorAdapter} with this new cursor containing updated product data
+        mCursorAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Callback called when the data needs to be deleted
+        mCursorAdapter.swapCursor(null);
+
+    }
+
+    /**
+     * Prompt the user to confirm that they want to delete all products.
+     */
+    private void showDeletConfirmationDialog() {
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.action_delete_all_entries));
+        builder.setPositiveButton(getText(R.string.action_delete), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Delete" button, so delete the pet.
+                deleteAllProducts();
+                Toast.makeText(getApplicationContext(), "All Products deleted successfully!", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int id) {
+                // User clicked the "Cancel" button, so dismiss the dialog
+                // and continue editing the products
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+        // Create and show the AlertDialog
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    /**
+     * Helper method to delete all games in the database.
+     */
+    private void deleteAllProducts() {
+        int rowsDeleted = getContentResolver().delete(ProductEntry.CONTENT_URI, null, null);
+        Log.v("CatalogActivity", rowsDeleted + "rows deleted from products database");
     }
 }

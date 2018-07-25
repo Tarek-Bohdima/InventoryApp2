@@ -21,20 +21,53 @@
 
   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-  --><!-- Options menu for the CatalogActivity -->
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+  -->
+
+<!-- Layout for a single list item in the list of products -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".CatalogActivity">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="horizontal"
+    android:padding="16dp">
 
-    <item
-        android:id="@+id/action_insert_dummy_data"
-        android:title="@string/action_insert_dummy_data"
-        app:showAsAction="never" />
+    <LinearLayout
+        android:id="@+id/info"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:orientation="vertical">
 
-    <item
-        android:id="@+id/action_delete_all_entries"
-        android:title="@string/action_delete_all_entries"
-        app:showAsAction="never" />
+        <TextView
+            android:id="@+id/product_name"
+            style="@style/TextView_catalog"
+            android:textAppearance="?android:textAppearanceMedium"
+            tools:text="Product Name" />
 
-</menu>
+
+        <TextView
+            android:id="@+id/product_price"
+            style="@style/TextView_catalog"
+            android:textAppearance="?android:textAppearanceSmall"
+            tools:text="10$" />
+
+        <TextView
+            android:id="@+id/product_quantity"
+            style="@style/TextView_catalog"
+            android:textAppearance="?android:textAppearanceSmall"
+            tools:text="100" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/sale_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:text="Sale"
+        android:textSize="18sp" />
+
+</LinearLayout>
