@@ -67,7 +67,7 @@
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="4dp"
         android:layout_marginStart="4dp"
-        android:text="Sale"
+        android:text="@string/sale"
         android:textSize="18sp" />
 
 </LinearLayout>

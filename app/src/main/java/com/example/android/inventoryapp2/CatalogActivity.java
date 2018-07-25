@@ -122,7 +122,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
-                showDeletConfirmationDialog();
+                showDeleteConfirmationDialog();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -164,7 +164,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     /**
      * Prompt the user to confirm that they want to delete all products.
      */
-    private void showDeletConfirmationDialog() {
+    private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

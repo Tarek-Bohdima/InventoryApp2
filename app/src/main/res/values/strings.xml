@@ -25,7 +25,7 @@
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
     <string name="action_delete_all_entries">Delete All Entries</string>
     <string name="editor_insert_product_failed">Error with saving product</string>
-    <string name="edit_insert_product_sucessful">Product Saved</string>
+    <string name="edit_insert_product_successful">Product Saved</string>
 
     <string name="increment_by_1">1</string>
     <string name="increment_by_10">10</string>
@@ -35,7 +35,7 @@
     <string name="edit_activity_title_new_product">Add a Product</string>
     <string name="editor_activity_title_edit_product">Edit Product</string>
     <string name="unsaved_changes_dialog_msg">Discard your changes and quit editing?</string>
-    <string name="discard">Discrad</string>
+    <string name="discard">Discard</string>
     <string name="keep_editing">Keep Editing</string>
     <string name="delete_dialog_msg">Delete this product?</string>
     <string name="delete">Delete</string>
@@ -44,5 +44,9 @@
     <string name="editor_delete_product_successful">Product deleted</string>
     <string name="editor_update_product_failed">Error with updating product</string>
     <string name="editor_update_product_successful">Product updated</string>
+    <string name="increment_by">Increment By:</string>
+    <string name="no_products_found">No Products Found</string>
+    <string name="click_on_add_button_to_add_new_product">Click on Add Button to add new Product</string>
+    <string name="sale">Sale</string>
 
 </resources>

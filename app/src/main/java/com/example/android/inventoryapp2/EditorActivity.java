@@ -25,6 +25,7 @@
 
 package com.example.android.inventoryapp2;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
@@ -131,7 +132,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     /**
      * OnTouchListener that listens for any user touches on a View, implying that they are modifying
-     * the view, and we change the mProducttHasChanged boolean to true.
+     * the view, and we change the mProductHasChanged boolean to true.
      */
     private View.OnTouchListener mTouchListener = new View.OnTouchListener() {
         @Override
@@ -141,6 +142,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
     };
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -376,8 +378,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 Toast.makeText(this, getString(R.string.editor_insert_product_failed), Toast.LENGTH_SHORT).show();
             } else {
                 // Otherwise, the insertion was successful and we can display a toast.
-                Toast.makeText(this, getString(R.string.edit_insert_product_sucessful), Toast.LENGTH_SHORT).show();
-            }finish();
+                Toast.makeText(this, getString(R.string.edit_insert_product_successful), Toast.LENGTH_SHORT).show();
+            }
+            finish();
         } else {
             // Otherwise this is an EXISTING product, so update the product with content URI: mCurrentProductUri
             // and pass in the new ContentValues. Pass in null for the selection and selection args

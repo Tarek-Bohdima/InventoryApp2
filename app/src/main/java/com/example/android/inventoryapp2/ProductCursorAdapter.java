@@ -29,6 +29,7 @@ package com.example.android.inventoryapp2;
  * Created by Tarek on 25-Jul-18.
  */
 
+import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -86,6 +87,7 @@ public class ProductCursorAdapter extends CursorAdapter {
      * @param cursor  The cursor from which to get the data. The cursor is already moved to the
      *                correct row.
      */
+    @SuppressLint("SetTextI18n")
     @Override
     public void bindView(View view, final Context context, Cursor cursor) {
         // Find individual views that we want to modify in the list item layout

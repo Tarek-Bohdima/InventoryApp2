@@ -24,6 +24,7 @@
   -->
 
 <!-- Layout for the editor -->
+<!--suppress CheckTagEmptyBody -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -87,7 +88,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_remove_circle_blue_700_24dp" />
+                android:src="@drawable/ic_remove_circle_blue_700_24dp"
+                tools:ignore="ContentDescription" />
 
             <!-- Quantity field-->
             <TextView
@@ -102,10 +104,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_add_circle_blue_700_24dp" />
+                android:src="@drawable/ic_add_circle_blue_700_24dp"
+                tools:ignore="ContentDescription" />
 
             <LinearLayout
-                android:id="@+id/spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -116,7 +118,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Increment By:"
+                    android:text="@string/increment_by"
                     android:textAppearance="?android:textAppearanceSmall"
                     android:textColor="@color/colorPrimaryDark"
                     tools:text="Increment By:" />
@@ -190,7 +192,8 @@
                 android:id="@+id/call_supplier"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_action_phone_start" />
+                android:src="@drawable/ic_action_phone_start"
+                tools:ignore="ContentDescription" />
 
         </LinearLayout>
     </LinearLayout>
